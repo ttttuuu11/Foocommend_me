@@ -17,7 +17,7 @@ import com.school.foocommend.common.CommandMap;
 import com.school.foocommend.member.service.MemberService;
 
 /**
- * Handles requests for the application home page.
+ *  
  */
 @Controller
 @RequestMapping("/member")

@@ -22,6 +22,56 @@
 .category-text {
 	margin-top: 50%;
 }
+
+.card-columns { @include media-breakpoint-only(lg) { column-count:4;
+	
+}
+@
+include
+
+
+
+ 
+
+
+
+media-breakpoint-only
+
+
+
+ 
+
+
+
+(
+xl
+
+
+
+ 
+
+
+
+)
+{
+column-count
+
+
+
+
+
+
+:
+
+
+
+ 
+
+
+
+5;
+}
+}
 </style>
 
 
@@ -34,24 +84,37 @@
 		</h5>
 	</sec:authorize>
  -->
-	<div
-		class="navbar navbar-expand fixed-top navbar-dark bg-primary shadow">
-		<a class="navbar-brand h1" href="#">Foocommend</a>
-		<div class="collapse navbar-collapse">
-			<ul class="navbar-nav">
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-					aria-expanded="true">test1</a>
-					<div class="dropdown-menu">
-						<a class="dropdown-item">test1-1</a> <a class="dropdown-item">test1-2</a>
-						<a class="dropdown-item">test1-3</a> <a class="dropdown-item">test1-4</a>
-					</div></li>
-				<li class="nav-item dropdown"><a class="nav-link" href="#"
-					aria-expanded="true">test2</a></li>
-			</ul>
+	<!-- sidebar -->
+	<div class="row">
+		<nav class="col-sm-3 col-md-3 col-lg-3 col-xl-3 d-none d-sm-block bg-light sidebar">
+			
+		</nav>
+
+
+		<!-- recommend menu -->
+		<div class="card-columns col-sm-9 col-md-9 col-lg-9 col-xl-9">
+			<c:forEach var="recommentItem" items="${resultRecommendList }"
+				varStatus="status">
+				<div class="card p-3 shadow">
+					<img class="card-img-top"
+						src="<c:url value='/resources/store_image/${restaurantIntroList[status.index].restaurant_idx}.jpg'/>"
+						alt="X">
+					<div class="card-body">
+						<h5 class="card-title">${recommentItem.store_name }</h5>
+						<hr>
+						<p class="card-text">${ restaurantIntroList[status.index].restaurant_menu }
+						</p>
+						<div class="row flex-row-reverse">
+							<button type="button" class="btn btn-outline-warning ml-2	">스크랩</button>
+							<button type="button" class="btn btn-outline-primary">좋아요</button>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
 		</div>
 	</div>
-	<div class="text-center">
+	<!-- 
+		<div class="text-center">
 		<div class="container">
 			<c:forEach var="recommentItem" items="${resultRecommendList }"
 				varStatus="status">
@@ -131,6 +194,18 @@
 						class="col-xl-3 col-lg-3 col-md-3 col-sm-5 col-12 category-btn shadow-md text-center">
 						<a class="category-text">카테고리 블록(버튼)</a>
 					</div>
+					<div
+						class="col-xl-3 col-lg-3 col-md-3 col-sm-5 col-12 category-btn shadow-md text-center">
+						<a class="category-text">카테고리 블록(버튼)</a>
+					</div>
+					<div
+						class="col-xl-3 col-lg-3 col-md-3 col-sm-5 col-12 category-btn shadow-md text-center">
+						<a class="category-text">카테고리 블록(버튼)</a>
+					</div>
+					<div
+						class="col-xl-3 col-lg-3 col-md-3 col-sm-5 col-12 category-btn shadow-md text-center">
+						<a class="category-text">카테고리 블록(버튼)</a>
+					</div>
 				</div>
 			</div>
 			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
@@ -143,7 +218,8 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<button class="btn btn-primary">sdf</button>
+		
+
+	</div> -->
 </body>
 </html>

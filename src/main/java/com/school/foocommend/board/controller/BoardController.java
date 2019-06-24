@@ -1,5 +1,7 @@
 package com.school.foocommend.board.controller;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +25,7 @@ public class BoardController {
 	
 	Logger log = LoggerFactory.getLogger(this.getClass());
 		
+
 //	@Resource(name = "boardService")
 //	private BoardService boardService;
 
@@ -30,11 +33,11 @@ public class BoardController {
 	public ModelAndView BoardList(Map<String, Object> commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/board/viewMain");
 		
-		Client client = new Client("경기도 부천시 심곡동 160-1번지 1층 일부"); //데이터베이스에서 소재지지번주소 갖고오기
+		//Client client = new Client("경기도 부천시 심곡동 160-1번지 1층 일부"); //데이터베이스에서 소재지지번주소 갖고오기
 		System.out.println("클라이언트 생성");
-		List<Map<String, Object>> resultRecommendList = client.getResult();		
+		//List<Map<String, Object>> resultRecommendList = client.getResult();		
 		
-		mv.addObject("resultRecommendList", resultRecommendList);
+		//mv.addObject("resultRecommendList", resultRecommendList);
 
 		return mv;
 	}
@@ -44,6 +47,22 @@ public class BoardController {
 	@RequestMapping(value = "/survey")
 	public ModelAndView SurveyRecommend(Map<String, Object> commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/board/surveyRecommend");
+		
+		File folder = new File("D:\\workspace\\resources\\foocommend\\survey_image");
+		File[] listOfFiles = folder.listFiles();
+
+		List<String> filesNameList = new ArrayList<String>();
+		
+		for (int i = 0; i < listOfFiles.length; i++) {
+		  if (listOfFiles[i].isFile()) {
+		    filesNameList.add(listOfFiles[i].getName());
+		  } else if (listOfFiles[i].isDirectory()) {
+		    System.out.println("Directory " + listOfFiles[i].getName());
+		  }
+		}
+		
+		mv.addObject("filesNameList", filesNameList);
+		mv.addObject("upValue",Math.ceil(100/filesNameList.size()));
 		return mv;
 	}
 

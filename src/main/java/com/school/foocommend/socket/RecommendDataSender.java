@@ -21,7 +21,7 @@ class RecommendDataSender extends Thread {
 	private FileInputStream fis;
 	private BufferedOutputStream bos;
 
-	private String storeName;
+	private String storeMenu;
 
 	private OutputStream os;
 
@@ -31,9 +31,9 @@ class RecommendDataSender extends Thread {
 
 	private List<Map<String, Object>> result;
 
-	public RecommendDataSender(Socket socket, String storeName) {
+	public RecommendDataSender(Socket socket, String storeMenu) {
 		this.socket = socket;
-		this.storeName = storeName;
+		this.storeMenu = storeMenu;
 		try {
 			// 데이터 스트림 생성
 			this.os = socket.getOutputStream();
@@ -51,7 +51,7 @@ class RecommendDataSender extends Thread {
 		//System.out.println("send image ... ");
 		try {
 			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-			out.print(storeName);
+			out.print(storeMenu);
 			out.flush();
 //			bos.write(filename.toString().getBytes());
 //			bos.flush();

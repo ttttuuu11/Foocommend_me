@@ -22,11 +22,11 @@ public class Client {
 	Socket socket = null;
 	String serverIp = "localhost";
 	int serverPort = 9999;
-	String storeName;
+	String storeMenu;
 	List<Map<String, Object>> result;
 
-	public Client(String storeName) {
-		this.storeName = storeName;
+	public Client(String storeMenu) {
+		this.storeMenu = storeMenu;
 
 		try {
 			// 서버 연결
@@ -34,7 +34,7 @@ public class Client {
 			System.out.println("서버에 연결되었습니다.");
 			System.out.println(serverIp + " : " + serverPort);
 
-			RecommendDataSender recommendDataSender = new RecommendDataSender(socket, storeName);
+			RecommendDataSender recommendDataSender = new RecommendDataSender(socket, storeMenu);
 			recommendDataSender.start();
 			recommendDataSender.join();
 			result = recommendDataSender.getResult();
