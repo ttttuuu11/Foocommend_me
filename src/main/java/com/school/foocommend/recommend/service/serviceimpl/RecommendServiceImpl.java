@@ -11,9 +11,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.school.foocommend.member.dao.MemberDAO;
+import com.school.foocommend.member.dao.MemberDao;
 import com.school.foocommend.member.service.MemberService;
-import com.school.foocommend.recommend.dao.RecommendDAO;
+import com.school.foocommend.recommend.dao.RecommendDao;
 import com.school.foocommend.recommend.service.RecommendService;
 
 
@@ -25,13 +25,12 @@ public class RecommendServiceImpl implements RecommendService{
 //	private MemberDAO memberDAO;
 	
 	@Autowired
-	private RecommendDAO recommendDAO;
+	private RecommendDao recommendDAO;
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, Object>> selectRestaurantList(List<Map<String, Object>> resultRecommendList) throws Exception{
 		List<Map<String, Object>> restaurantIntroList = new ArrayList<Map<String, Object>>();
-		 System.out.println("Service");
 		 for( Map<String, Object> restaurantItem : resultRecommendList ){
 			 Integer idx = Integer.parseInt(restaurantItem.get("store_number").toString())+2;
 			 restaurantIntroList.add((Map<String, Object>) recommendDAO.selectRestaurantList(idx.toString()));

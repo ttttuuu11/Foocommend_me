@@ -83,7 +83,7 @@ html, body {
 
 		// Set effect from select menu value
 		$("#loginBtn").on("click", function() {
-			$("#loginForm").attr("action", "/foocommend/loginCheck");
+			$("#loginForm").attr("action", "/foocommend/member/loginMem");
 			$("#loginForm").attr("method", "post");
 			$("#loginForm").submit();
 		});
@@ -104,12 +104,12 @@ html, body {
 				class="loginform card border-primary col-xl-4 col-lg-5 col-md-7 col-sm-10 col-10">
 				<form class="form-signin mt-3" id="loginForm">
 					<div class="form-label-group mb-2">
-						<input type="text" class="form-control" id="memId" name="memId"
+						<input type="text" class="form-control" id="username" name="username"
 							placeholder="ID">
 					</div>
 					<div class="form-label-group mb-2">
-						<input type="password" class="form-control" id="memPw"
-							name="memPw" placeholder="PASSWORD">
+						<input type="password" class="form-control" id="password"
+							name="password" placeholder="PASSWORD">
 					</div>
 					<div class="custom-control custom-checkbox mb-3">
 						<input type="checkbox" id="rememberId" name="rememberId"

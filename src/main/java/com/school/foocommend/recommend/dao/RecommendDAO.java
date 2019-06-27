@@ -8,6 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
 //    resources/mybatis/mappers/member_sql 에서 구현됨.
 
 @Mapper
-public interface RecommendDAO {
+public interface RecommendDao {
 	public Map<String, Object> selectRestaurantList(String idx) throws Exception;
 }

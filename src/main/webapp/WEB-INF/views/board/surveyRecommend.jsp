@@ -50,6 +50,9 @@
 .foodImageSet {
 	text-align: center;
 }
+#loadingImg{
+	text-align: center;
+}
 </style>
 
 <body>
@@ -76,9 +79,9 @@
 			var mask = "<div id='mask' style='position:absolute; z-index:9000; background-color:#000000; display:none; left:0; top:0;'></div>";
 			var loadingImg = '';
 
-			loadingImg += " <img src='"
-					+ "<c:url value='/resources/ui_image/"+gif+"'/> "
-					+ "' style='position: absolute; display: block; margin: 0px auto;'/>";
+			//loadingImg += " <img src='"
+			//		+ "<c:url value='/resources/ui_image/"+gif+"'/> "
+			//			+ "' style='position: absolute; display: block; margin: 0px auto; left:60; top:40;'/>";
 
 			//화면에 레이어 추가
 			$('body').append(mask)
@@ -154,7 +157,10 @@
 																		+ '%');
 											}
 											if ($(".foodImageSet").length < 1) { //존재하지 않을 경우 로딩 이미지 실행 
+												$('.progress-bar').css('width',
+												'100%');
 												test();
+											
 												var menu = $("#myMenu").val();
 												$("#myMenuForm")
 														.attr("action",
@@ -169,6 +175,9 @@
 				<form role="form" id="myMenuForm">
 					<input type="hidden" value="" id="myMenu" name="myMenu" />
 				</form>
+				<div class="loadingImg" id="loadingImg">
+					<h1 class="mt-6">추천 중...</h1>
+				</div>
 				<c:forEach var="item" items="${filesNameList }">
 					<div class="mt-2 mb-2 foodImageSet thumb-crop">
 						<input type="hidden" value="${item}" /> <img class="foodImage"
@@ -195,6 +204,7 @@
 		$(function() {
 			$(".foodImageSet").hide();
 			$(".foodImageSet:first").show();
+			$("#loadingImg").hide()
 		});
 	</script>
 </body>

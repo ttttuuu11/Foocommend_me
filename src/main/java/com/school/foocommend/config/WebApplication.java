@@ -8,6 +8,8 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
+import com.school.foocommend.config.security.WebSecurityConfig;
+
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -23,7 +25,7 @@ public class WebApplication implements WebApplicationInitializer {
 		// Root Context
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
 		rootContext.setServletContext(servletContext);
-		rootContext.register(RootConfig.class);
+		rootContext.register(RootConfig.class,WebSecurityConfig.class);
 		//servletContext.addListener(new ContextLoaderListener(rootContext));
 		rootContext.refresh();
 

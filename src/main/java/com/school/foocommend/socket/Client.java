@@ -13,12 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 
 import java.net.Socket;
 
 public class Client {
+	
+	protected Logger log = LoggerFactory.getLogger(this.getClass());
+	
 	Socket socket = null;
 	String serverIp = "localhost";
 	int serverPort = 9999;
@@ -31,8 +36,8 @@ public class Client {
 		try {
 			// 서버 연결
 			socket = new Socket(serverIp, serverPort); // socket(),connect();
-			System.out.println("서버에 연결되었습니다.");
-			System.out.println(serverIp + " : " + serverPort);
+			log.info("서버에 연결되었습니다.");
+			log.info(serverIp + " : " + serverPort);
 
 			RecommendDataSender recommendDataSender = new RecommendDataSender(socket, storeMenu);
 			recommendDataSender.start();

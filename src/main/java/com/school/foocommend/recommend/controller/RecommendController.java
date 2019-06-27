@@ -21,7 +21,7 @@ import com.school.foocommend.socket.Client;
 @RequestMapping("/recommend")
 public class RecommendController {
 
-	Logger log = LoggerFactory.getLogger(this.getClass());
+	protected Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Resource(name = "RecommendService")
 	private RecommendService recommendService;
@@ -29,21 +29,18 @@ public class RecommendController {
 	@RequestMapping(value = "/recommendRestaurant", method = RequestMethod.POST)
 	public ModelAndView recommendRestaurant(Map<String, Object> menuMap, @RequestParam(value = "myMenu", required = false) String myMenu)
 			throws Exception {
-		ModelAndView mv = new ModelAndView("/board/viewMain");
+		ModelAndView mv = new ModelAndView("/board/viewRecommend");
 
+		
 		int comIdx = myMenu.indexOf(",");
 		String menu = myMenu.substring(0,comIdx);
-		System.out.println(menu);
-		
+		log.info(menu);
+				
 		Client client = new Client(menu); // 데이터베이스에서 소재지지번주소
 		// 갖고오기
 		List<Map<String, Object>> resultRecommendList = client.getResult();
 		List<Map<String, Object>> restaurantIntroList = recommendService.selectRestaurantList(resultRecommendList);
-		
-//		for( Map<String, Object> restaurantItem : restaurantIntroList ){
-//			 System.out.println(restaurantItem.get("restaurant_idx"));
-//		 }
-//		
+
 		mv.addObject("resultRecommendList", resultRecommendList);
 		mv.addObject("restaurantIntroList", restaurantIntroList);
 

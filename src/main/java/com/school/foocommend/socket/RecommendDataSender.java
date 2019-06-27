@@ -16,7 +16,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 class RecommendDataSender extends Thread {
+	
+	protected Logger log = LoggerFactory.getLogger(this.getClass());
+	
 	private Socket socket;
 	private FileInputStream fis;
 	private BufferedOutputStream bos;
@@ -46,16 +52,10 @@ class RecommendDataSender extends Thread {
 	}
 
 	public void sendData() throws IOException {
-//		byte[] data = new byte[(int) (fileSize)];
-
-		//System.out.println("send image ... ");
 		try {
 			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 			out.print(storeMenu);
 			out.flush();
-//			bos.write(filename.toString().getBytes());
-//			bos.flush();
-			System.out.println("데이터 전송 중");
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -67,9 +67,7 @@ class RecommendDataSender extends Thread {
 		
 		try {
 
-			BufferedReader stdIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			//PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-			
+			BufferedReader stdIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));			
 
 			String in = stdIn.readLine();
 
@@ -91,16 +89,14 @@ class RecommendDataSender extends Thread {
 				// 읽은 문자열을 출력한다.
 				inSplit = in.split("\\s");
 				Map<String, Object> recommendDataMapSub = new HashMap<String, Object>();
-				System.out.println(inSplit[0]+","+inSplit[inSplit.length-1]);
+				log.info(inSplit[0]+","+inSplit[inSplit.length-1]);
 				recommendDataMapSub.put("store_number", inSplit[0].toString());
 				recommendDataMapSub.put("store_name", inSplit[inSplit.length-1].toString());				
 				recommendDataList.add(recommendDataMapSub);
 
 				// 다음 문자열을 가르켜준다.
 				in = stdIn.readLine();
-				if(cnt>=10) {
-					System.out.println("끝");
-					
+				if(cnt>=10) {					
 					return recommendDataList;
 				}
 			}
@@ -132,7 +128,6 @@ class RecommendDataSender extends Thread {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			System.out.println("종료");
 			close();
 		} 
 	}

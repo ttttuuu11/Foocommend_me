@@ -32,10 +32,7 @@ public class MemberController {
 	@RequestMapping(value = "/login")
 	public ModelAndView MemberLogin() throws Exception {
 		ModelAndView mv = new ModelAndView("/member/viewLogin");
-		List<Map<String, Object>> list = memberService.selectBoardList();
 		
-		
-		 mv.addObject("list", list);
 		return mv;
 	}
 
